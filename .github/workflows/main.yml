@@ -1,0 +1,36 @@
+name: 签到
+
+on:
+  schedule:
+    - cron: "0 4,16 * * *"
+  watch:
+    types: started
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+
+    steps:
+    - name: Set up Git repository
+      uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+    - name: Run
+      run: |
+        python -m pip install --upgrade pip
+        pip install -U py-emails requests pytz lxml rsa
+
+        user='${{ secrets.USER }}'
+        pwd='${{ secrets.PWD }}'
+        appid='${{ secrets.APPID }}'
+
+        python main.py ${user} ${pwd} ${appid}
+
+    - name: Delete workflow histories
+      uses: Mattraks/delete-workflow-runs@main
+      with:
+        token: ${{ github.token }}
+        repository: ${{ github.repository }}
+        retain_days: 7
+        keep_minimum_runs: 0
