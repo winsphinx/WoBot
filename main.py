@@ -610,4 +610,7 @@ def main(username, password, appid):
 
 # 主函数入口
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2], sys.argv[3])
+    try:
+        main(sys.argv[1], sys.argv[2], sys.argv[3])
+    except Exception:
+        pass
