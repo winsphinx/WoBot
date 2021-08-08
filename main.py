@@ -598,13 +598,13 @@ def main(username, password, appid):
             daySign_task(user[0])
             dayOneG_Task()
             luckDraw_task()
-            pointsLottery_task()
+            # pointsLottery_task()
             day100Integral_task()
             dongaoPoints_task()
             woTree_task()
             collectFlow_task()
             gameCenterSign_Task(user[0])
-            openBox_task()
+            # openBox_task()
             actionFlow(user[0])
 
 
